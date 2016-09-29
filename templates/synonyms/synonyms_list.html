@@ -4,6 +4,13 @@
 {% block heading %}<a href="{% url synonyms:synonyms_list %}">{% trans "Synonyms" %}</a>{% endblock heading %}
 {% block content %}
 
+<style>
+  .select2-container-multi .select2-choices {
+    background: none;
+    border: none;
+  }
+</style>
+
 <div class="itemcontent">
    
     <h3><strong>Synonyms</strong></h3>
@@ -13,7 +20,19 @@
         {% for synonym in synonyms %}
         <tr class="{master cycle row1,row2 %}">
             <td><a href="{% url synonyms:synonym_edit synonym_id=synonym.pk %}">{{synonym.value}}</a></td>
-            <td>{% for i in synonym.synonyms.all %} {{i.value}} <a href="{% url synonyms:synonym_remove synonym_id=i.pk %}">x</a>, {% endfor %} <a href="{% url synonyms:synonym_addchild parent_id=synonym.pk %}" type="button" class="button button-navigator">Add</a></td>
+            <td> 
+            <div class="select2-container select2-container-multi">
+              <ul class="select2-choices">
+                {% for i in synonym.synonyms.all %} 
+                <li class="select2-search-choice">
+                  <div>{{i.value}}</div>
+                  <a href="{% url synonyms:synonym_remove synonym_id=i.pk %}" class="select2-search-choice-close" tabindex="-1"></a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <a href="{% url synonyms:synonym_addchild parent_id=synonym.pk %}" type="button" class="button button-navigator">Add</a>
+            </td>
             <td><a href="{% url synonyms:synonym_remove synonym_id=synonym.pk %}">Remove</a></td>
         </tr>
         {% endfor %}
