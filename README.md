@@ -6,19 +6,19 @@ Whenever the metadata of an item is changed, each entry in the predefined tag fi
 
 ## Installation
 
-Place the plugin's file in a "synonym" folder in /opt/cantemo/portal/portal/plugins.
+Place the plugin's file in a "synonym" folder in /opt/cantemo/portal/portal/plugins.  
 In the plistner.py file, change the TAGS_FIELD value by the machine name of your tag field.
 
-In shell, type:
-cd /opt/cantemo/portal/
-./manage.py schemamigration synonyms --initial
-./manage.py migrate synonyms
+In shell, type:  
+cd /opt/cantemo/portal/  
+./manage.py schemamigration synonyms --initial  
+./manage.py migrate synonyms  
 
 
 ## Configuration
 
-Go to http://\<Yourserverurl\>/synonyms/admin/ or click in the "Synonym" menu item, under "Admin".
-Click on "Add new synonym" to add a new term.
+Go to http://\<Yourserverurl\>/synonyms/admin/ or click in the "Synonym" menu item, under "Admin".  
+Click on "Add new synonym" to add a new term.  
 Click on "Add" to add a synonym to this term. Each synonyms will be replaced by the parent term.
 
 
