@@ -1,0 +1,30 @@
+{% themeextends "admin/base_admin.html" %}
+{% load i18n %}
+{% block title %} Synonyms {% endblock %}
+{% block heading %} Synonyms Settings {% endblock heading %}
+
+{% block content %}
+
+<div class="itemcontent">
+
+    <h3><strong>Synonyms</strong></h3>
+    <a href="{% url synonyms:synonym_new %}" type="button" class="button button-navigator">Add new synonym</a>
+    <table class="generictbl dataTable" id="videotagtable" aria-describedby="videotagtable_info">
+      <tbody>
+        {% for synonym in synonyms %}
+        <tr class="{master cycle row1,row2 %}">
+            <td><a href="{% url synonyms:synonym_edit synonym_id=synonym.pk %}">{{synonym.value}}</a></td>
+            <td>{% for i in synonym.synonyms.all %} {{i.value}} <a href="{% url synonyms:synonym_remove synonym_id=i.pk %}">x</a>, {% endfor %} <a href="{% url synonyms:synonym_addchild parent_id=synonym.pk %}" type="button" class="button button-navigator">Add</a></td>
+            <td><a href="{% url synonyms:synonym_remove synonym_id=synonym.pk %}">Remove</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+</div><!-- /itemcontent-->
+
+<script>
+
+</script>
+{% endblock content %}
