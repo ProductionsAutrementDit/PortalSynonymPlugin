@@ -1,12 +1,11 @@
-{% themeextends "admin/base_admin.html" %}
+{% themeextends "synonyms/base_synonyms.html" %}
 {% load i18n %}
-{% block title %} Synonyms {% endblock %}
-{% block heading %} Synonyms Settings {% endblock heading %}
-
+{% block title %}{% trans 'Synonyms' %}{% endblock %}
+{% block heading %}<a href="{% url synonyms:synonyms_list %}">{% trans "Synonyms" %}</a>{% endblock heading %}
 {% block content %}
 
 <div class="itemcontent">
-
+   
     <h3><strong>Synonyms</strong></h3>
     <a href="{% url synonyms:synonym_new %}" type="button" class="button button-navigator">Add new synonym</a>
     <table class="generictbl dataTable" id="videotagtable" aria-describedby="videotagtable_info">
@@ -20,11 +19,8 @@
         {% endfor %}
       </tbody>
     </table>
-
-
+    
 </div><!-- /itemcontent-->
 
-<script>
 
-</script>
 {% endblock content %}

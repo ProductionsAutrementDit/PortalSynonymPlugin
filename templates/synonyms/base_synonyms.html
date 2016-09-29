@@ -1,0 +1,16 @@
+{% themeextends "base.html" %}
+{% load i18n compress %}
+{% load render_bundle from webpack_loader %}
+
+{% block body %}
+    <div class="headerwrapper">
+        <div id="header" class="header">
+             <h1>{% block heading %}<a href="{% url synonyms:synonyms_list %}">{% trans "Synonyms" %}</a>{% endblock heading %}</h1>
+        </div>
+    </div>
+    <div id="content" class="content">
+        <div class="pagecontent">
+        {% block content %}{% endblock content %}
+        </div>
+    </div><!-- #content -->
+{% endblock body %}

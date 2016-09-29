@@ -1,8 +1,7 @@
-{% themeextends "admin/base_admin.html" %}
+{% themeextends "synonyms/base_synonyms.html" %}
 {% load i18n %}
-{% block title %} Synonyms: {{synonym.value}} {% endblock %}
-{% block heading %} Synonyms Settings: {{synonym.value}} {% endblock heading %}
-
+{% block title %}{% trans 'Synonyms' %}{% endblock %}
+{% block heading %}<a href="{% url synonyms:synonyms_list %}">{% trans "Synonyms" %}</a>: Add new{% endblock heading %}
 {% block content %}
 
 <div class="itemcontent">
@@ -33,7 +32,5 @@
 
 </div><!-- /itemcontent-->
 
-<script>
 
-</script>
 {% endblock content %}

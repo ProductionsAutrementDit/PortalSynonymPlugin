@@ -11,11 +11,10 @@ from django.conf.urls.defaults import *
 # name is shortcut name for the urls.
 
 urlpatterns = patterns('portal.plugins.synonyms.views',
-    url(r'^$', 'GenericAppView', kwargs={'template': 'synonyms/index.html'}, name='index'),
-    url(r'^admin/$', 'SynonymsView', kwargs={'template': 'synonyms/admin/synonyms_list.html'}, name='synonyms_list'),
-    url(r'^admin/synonym/add$', 'SynonymEditView', kwargs={'template': 'synonyms/admin/synonym_edit.html'}, name='synonym_new'),
-    url(r'^admin/synonym/(?P<synonym_id>\d+)$', 'SynonymEditView', kwargs={'template': 'synonyms/admin/synonym_edit.html'}, name='synonym_edit'),
-    url(r'^admin/synonym/(?P<synonym_id>\d+)/remove$', 'SynonymRemoveView', kwargs={}, name='synonym_remove'),
-    url(r'^admin/synonym/(?P<parent_id>\d+)/(?P<synonym_id>\d+)$', 'SynonymEditView', kwargs={'template': 'synonyms/admin/synonym_edit.html'}, name='synonym_editchild'),
-    url(r'^admin/synonym/(?P<parent_id>\d+)/add$', 'SynonymEditView', kwargs={'template': 'synonyms/admin/synonym_edit.html'}, name='synonym_addchild'),
+    url(r'^$', 'SynonymsView', kwargs={'template': 'synonyms/synonyms_list.html'}, name='synonyms_list'),
+    url(r'^synonym/add$', 'SynonymEditView', kwargs={'template': 'synonyms/synonym_edit.html'}, name='synonym_new'),
+    url(r'^synonym/(?P<synonym_id>\d+)$', 'SynonymEditView', kwargs={'template': 'synonyms/synonym_edit.html'}, name='synonym_edit'),
+    url(r'^synonym/(?P<synonym_id>\d+)/remove$', 'SynonymRemoveView', kwargs={}, name='synonym_remove'),
+    url(r'^synonym/(?P<parent_id>\d+)/(?P<synonym_id>\d+)$', 'SynonymEditView', kwargs={'template': 'synonyms/synonym_edit.html'}, name='synonym_editchild'),
+    url(r'^synonym/(?P<parent_id>\d+)/add$', 'SynonymEditView', kwargs={'template': 'synonyms/synonym_edit.html'}, name='synonym_addchild'),
 )

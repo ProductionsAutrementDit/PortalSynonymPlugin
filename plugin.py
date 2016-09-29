@@ -26,6 +26,19 @@ class SynonymsPluginURL(Plugin):
 
 pluginurls = SynonymsPluginURL()
 
+# Create a menu item for ingest in the ingest section in the navbar
+class SynonymstMenuNavigationPlugin(Plugin):
+    implements(IPluginBlock)
+
+    def __init__(self):
+        self.name = "NavigationManagePlugin"
+        self.plugin_guid = "adb62a9f-6863-497b-957a-63a7daebac3d"
+
+    def return_string(self, tagname, *args):
+        return {'guid': self.plugin_guid, 'template': 'synonyms/menuitem.html'}
+
+navbarplugin = SynonymstMenuNavigationPlugin()
+
 
 class SynonymsAdminNavigationPlugin(Plugin):
     # This adds your app to the navigation bar
