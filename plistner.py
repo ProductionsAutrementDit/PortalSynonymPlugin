@@ -33,7 +33,7 @@ def item_post_modify_handler(instance, method, **kwargs):
                 parent_synonym = synonym.parent
                 change = True
                 new_values.append(parent_synonym.value) 
-                log.info("Synonyms: modified tag from %s to %s" % (tag, parent_synonym.value))
+                log.debug("Synonyms: modified tag from %s to %s" % (tag, parent_synonym.value))
             except Synonym.DoesNotExist as e:
                 new_values.append(tag)
                 
