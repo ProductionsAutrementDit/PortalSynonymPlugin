@@ -17,7 +17,7 @@ cd /opt/cantemo/portal/
 
 ## Configuration
 
-Go to http://<Your_server_url>/synonyms/admin/.
+Go to http://<Yourserverurl>/synonyms/admin/ or click in the "Synonym" menu item, under "Admin".
 Click on "Add new synonym" to add a new term.
 Click on "Add" to add a synonym to this term. Each synonyms will be replaced by the parent term.
 
