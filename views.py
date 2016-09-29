@@ -60,8 +60,6 @@ class SynonymEditView(ClassView):
         else:
             if child:
                 synonym = Synonym(parent=parent_synonym)
-                #TODO: redirect to parent synonym
-                redirect_dest = ''
             else:
                 synonym = Synonym()
             
