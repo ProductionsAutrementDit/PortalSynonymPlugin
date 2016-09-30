@@ -17,6 +17,9 @@ from portal.vidispine.iexception import NotFoundError
 
 from portal.plugins.synonyms.models import Synonym
 from portal.plugins.synonyms.forms import SynonymForm
+from portal.plugins.synonyms.models import TagField
+from portal.plugins.synonyms.forms import TagFieldForm
+
 
 log = logging.getLogger(__name__)
 
@@ -94,6 +97,27 @@ class SynonymRemoveView(ClassView):
 # setup the object, and decorate so that only logged in users can see it
 SynonymRemoveView = SynonymRemoveView._decorate(login_required)
 
+class SettingsView(ClassView):
+
+    def __call__(self):
+        
+        ctx = {}
+
+        tagfields = TagField.objects.all()
+
+        if self.request.method == u'POST':
+            tagfield_form = TagFieldForm(self.request.POST, prefix='settings')
+            if tagfield_form.is_valid():
+                tagfield = tagfield_form.save()
+        else:
+            tagfield_form = TagFieldForm(prefix='settings')      
+        
+        
+        ctx = {u'tagfields': tagfields, u'tagfield_form': tagfield_form}
+        return self.main(self.request, self.template, ctx)
+
+# setup the object, and decorate so that only logged in users can see it
+SettingsView = SettingsView._decorate(login_required)
 
 class GenericAppView(ClassView):
     """ Show the page. Add your python code here to show dynamic content or feed information in

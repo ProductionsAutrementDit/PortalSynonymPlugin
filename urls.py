@@ -17,4 +17,5 @@ urlpatterns = patterns('portal.plugins.synonyms.views',
     url(r'^synonym/(?P<synonym_id>\d+)/remove$', 'SynonymRemoveView', kwargs={}, name='synonym_remove'),
     url(r'^synonym/(?P<parent_id>\d+)/(?P<synonym_id>\d+)$', 'SynonymEditView', kwargs={'template': 'synonyms/synonym_edit.html'}, name='synonym_editchild'),
     url(r'^synonym/(?P<parent_id>\d+)/add$', 'SynonymEditView', kwargs={'template': 'synonyms/synonym_edit.html'}, name='synonym_addchild'),
+    url(r'^admin/$', 'SettingsView', kwargs={'template': 'synonyms/admin/settings.html'}, name='settings'),
 )

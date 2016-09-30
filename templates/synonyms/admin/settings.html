@@ -1,0 +1,58 @@
+{% themeextends "admin/base_admin.html" %}
+{% load i18n %}
+{% block title %} Synonyms {% endblock %}
+{% block heading %} Synonyms Settings {% endblock heading %}
+
+{% block content %}
+<style>
+    .file_valid {
+        color: green;
+    }
+
+    .file_error {
+        color: red;
+    }
+</style>
+
+<div class="itemcontent">
+
+    <form action="{% url synonyms:settings %}" method="POST" class="formmain">
+        {% csrf_token %}
+
+        <fieldset>
+
+            <h3><strong>Tag Fields</strong></h3>
+
+                
+            <table class="generictbl dataTable" id="videotagtable" aria-describedby="videotagtable_info">
+
+              <tbody>
+                {% for tagfield in tagfields %}
+                <tr class="{% cycle row1,row2 %}">
+                    <td></td>
+                    <td>{{tagfield.fieldname}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                  <td>
+                  {{ tagfield_form }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <ul>
+                <li class="mono">
+                    <input type="Submit"/>
+                </li>
+            </ul>
+        </fieldset>
+
+
+    </form>
+</div><!-- /itemcontent-->
+
+<script>
+
+</script>
+{% endblock content %}
