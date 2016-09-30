@@ -7,7 +7,6 @@ Whenever the metadata of an item is changed, each entry in the predefined tag fi
 ## Installation
 
 Place the plugin's file in a "synonym" folder in /opt/cantemo/portal/portal/plugins.  
-In the plistner.py file, change the TAGS_FIELD value by the machine name of your tag field.
 
 In shell, type:  
 cd /opt/cantemo/portal/  
@@ -18,11 +17,16 @@ cd /opt/cantemo/portal/
 ## Configuration
 
 Go to http://\<Yourserverurl\>/synonyms/admin/ or click in the "Synonym" menu item, under "Admin".  
+Add as many tag fields as you need.   
+Go to http://\<Yourserverurl\>/synonyms/ or click in the "Synonym" menu item, under "Manage". 
 Click on "Add new synonym" to add a new term.  
 Click on "Add" to add a synonym to this term. Each synonyms will be replaced by the parent term.
 
 
+## Use
+
+Edit an item metadata or create a new item.   
+Upon item save, tag fields values are inspected and replaced by their synonym.
+
 ## TODO
-1. Add a settings page, with a dropdown to choose the tag field to inspect.
-2. Allow to inspect multiple tag fields
-3. Add a function to inspect all Portal elements and replace synonyms (can be very long)
+1. Add a function to inspect all Portal elements and replace synonyms (can be very long)
