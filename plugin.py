@@ -8,7 +8,7 @@ that serves up index.html file
 import logging
 
 from portal.pluginbase.core import Plugin, implements
-from portal.generic.plugin_interfaces import (IPluginURL, IPluginBlock, IAppRegister)
+from portal.generic.plugin_interfaces import (IPluginURL, IPluginBlock, IAppRegister, IPluginBootstrap)
 
 log = logging.getLogger(__name__)
 
@@ -71,7 +71,6 @@ class SynonymsAdminMenuPlugin(Plugin):
 
 pluginblock = SynonymsAdminMenuPlugin()
 
-
 class SynonymsRegister(Plugin):
     # This adds it to the list of installed Apps
     # Please update the information below with the author etc..
@@ -94,3 +93,16 @@ class SynonymsRegister(Plugin):
 
 synonymsplugin = SynonymsRegister()
 
+
+class SynonymsBootstrap(Plugin):
+
+    implements(IPluginBootstrap)
+
+    def bootstrap(self):
+        from portal.plugins.synonyms.plistner import synonyms_item_post_modify_handler
+        from portal.vidispine.signals import vidispine_post_modify, vidispine_post_create
+    
+        vidispine_post_modify.connect(synonyms_item_post_modify_handler)
+        vidispine_post_create.connect(synonyms_item_post_modify_handler)
+
+SynonymsBootstrap()

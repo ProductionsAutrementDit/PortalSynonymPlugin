@@ -6,7 +6,3 @@ class Synonym(models.Model):
 
 class TagField(models.Model):
     fieldname = models.CharField(max_length=255)
-
-
-
-from portal.plugins.synonyms.plistner import item_post_modify_handler

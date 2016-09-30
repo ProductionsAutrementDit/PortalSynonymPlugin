@@ -15,10 +15,8 @@ from portal.generic.baseviews import ClassView
 from portal.vidispine.iitem import ItemHelper
 from portal.vidispine.iexception import NotFoundError
 
-from portal.plugins.synonyms.models import Synonym
-from portal.plugins.synonyms.forms import SynonymForm
-from portal.plugins.synonyms.models import TagField
-from portal.plugins.synonyms.forms import TagFieldForm
+from portal.plugins.synonyms.models import Synonym, TagField
+from portal.plugins.synonyms.forms import SynonymForm, TagFieldForm
 
 
 log = logging.getLogger(__name__)

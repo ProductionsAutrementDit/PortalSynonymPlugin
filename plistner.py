@@ -6,10 +6,9 @@ from django.conf import settings
 from portal.vidispine.iitem import ItemHelper
 from VidiRest.helpers.vidispine import createMetadataDocumentFromDict
 
-from portal.plugins.synonyms.models import Synonym
-from portal.plugins.synonyms.models import TagField
+from portal.plugins.synonyms.models import Synonym, TagField
 
-def item_post_modify_handler(instance, method, **kwargs):
+def synonyms_item_post_modify_handler(instance, method, **kwargs):
     if method == 'setItemMetadata':
         
         ith = ItemHelper()
@@ -82,13 +81,6 @@ def item_pre_modify_handler(instance, method, metadata_document, **kwargs):
         #log.info("Synonyms: pre created/modified metadata: %s" % tags)
         #log.info("Synonyms: pre created/modified kwargs: %s" % kwargs)
 '''
-
-
-from portal.vidispine.signals import vidispine_post_modify, vidispine_post_create, vidispine_pre_modify
-    
-vidispine_post_modify.connect(item_post_modify_handler)
-vidispine_post_create.connect(item_post_modify_handler)
-#vidispine_pre_modify.connect(item_pre_modify_handler)
 
 
     
