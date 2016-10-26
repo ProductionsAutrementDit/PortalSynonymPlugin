@@ -99,10 +99,12 @@ class SynonymsBootstrap(Plugin):
     implements(IPluginBootstrap)
 
     def bootstrap(self):
-        from portal.plugins.synonyms.plistner import synonyms_item_post_modify_handler
-        from portal.vidispine.signals import vidispine_post_modify, vidispine_post_create
+        from portal.plugins.synonyms.plistner import synonyms_item_post_modify_handler, synonyms_item_pre_modify_handler
+        from portal.vidispine.signals import vidispine_post_modify, vidispine_post_create, vidispine_pre_modify, vidispine_pre_create
     
-        vidispine_post_modify.connect(synonyms_item_post_modify_handler)
-        vidispine_post_create.connect(synonyms_item_post_modify_handler)
+        #vidispine_post_modify.connect(synonyms_item_post_modify_handler)
+        #vidispine_post_create.connect(synonyms_item_post_modify_handler)
+        vidispine_pre_modify.connect(synonyms_item_pre_modify_handler)
+        vidispine_pre_create.connect(synonyms_item_pre_modify_handler)
 
 SynonymsBootstrap()

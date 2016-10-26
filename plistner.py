@@ -52,35 +52,44 @@ def synonyms_item_post_modify_handler(instance, method, **kwargs):
             ith.setItemMetadata(instance, metadata_document, skipForbidden=True, return_format='xml')
 
 
-'''
-def item_pre_modify_handler(instance, method, metadata_document, **kwargs):
-    if method == 'setItemMetadata':
-        
-        ith = ItemHelper()
-        
-        item = ith.getItem(instance)
-        
-        if 'metadata_document' in kwargs:
-            metadata_document = kwargs['metadata_document']
 
-            
-            for timespan in metadata_document.timespan:
-                if timespan.start == '-INF' and timespan.end == '+INF':
-                    for field in timespan.field:
-                        if field.name == TAGS_FIELD:
-                            for value in field.value_:
-                                new_value = value.value().replace('test', 'test2')
-                                value = VSXMLSchema.MetadataValueType(new_value)
-            
-            groups = ith.getItemMetadataFieldGroups(instance)
-            group = groups['uri'][0]
-            
-            tags_field = item.getMetadataFieldByName(TAGS_FIELD)
-            tags = tags_field.getFieldValues()
+def synonyms_item_pre_modify_handler(instance, method, metadata_document, **kwargs):
+    if method == 'setItemMetadata':
     
-        #log.info("Synonyms: pre created/modified metadata: %s" % tags)
-        #log.info("Synonyms: pre created/modified kwargs: %s" % kwargs)
-'''
+        import VidiRest.schemas.xmlSchema as VSXMLSchema
+        
+        log.debug("Call pre modify")
+    
+        tag_fields = TagField.objects.all()
+        
+        tag_fieldnames = []
+        
+        for tag_field in tag_fields:
+            tag_fieldnames.append(tag_field.fieldname)         
+            log.debug("Synonyms: get field names: %s" % tag_field.fieldname)
+        
+        for timespan_index, timespan in enumerate(metadata_document.timespan):
+            log.debug("Found timespan")
+            if timespan.start == '-INF' and timespan.end == '+INF':
+                for field_index, field in enumerate(timespan.field):
+                    log.debug("Found field %s" % field.name)
+                    if field.name in tag_fieldnames:
+                        change = False
+                        new_values = []
+                        for value in field.value_:
+                            log.debug("Found value %s" % value.value())
+                            try:
+                                synonym = Synonym.objects.get(value=value.value(), parent__isnull=False)
+                                parent_synonym = synonym.parent
+                                change = True
+                                new_values.append(VSXMLSchema.MetadataValueType(parent_synonym.value))
+                                log.debug("Synonyms: modified tag field %s value from %s to %s" % (field.name, value.value(), parent_synonym.value))
+                            except Synonym.DoesNotExist as e:
+                                log.debug("Synonyms: do not modify tag field %s value %s" % (field.name, value.value()))
+                                new_values.append(VSXMLSchema.MetadataValueType(value.value()))
+                        if change:
+                            metadata_document.timespan[timespan_index].field[field_index].value_ = new_values
+
 
 
     
